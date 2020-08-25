@@ -55,17 +55,15 @@ class InputComponent extends LightningElement {
 
 ## Motivation
 
-LWC today does not encourage reusability of assets already created in a components ecosystem.
-To gain scale when developing base components for a components ecosystem (or any library of components) reusability is a basic requirement.
+The key to build a scalable ecosystem of web components is reusability of assets already created. Scalable front-end includes multiple items like composition (parent-child), extensibility (class extension), and reuse of a template. Today LWC does not allow to build reusable templates which leads to a situation where when creating a set of components they can't reuse already defined assets (the templates).
 
+Consider the following scenario.
 
-Why are we doing this? What use cases does it support? What is the expected
-outcome?
+An author builds a set of base components for their organization. It includes all kind of inputs, lists, dropdowns, alerts, etc. Then the author builds a higher-level composite component like a chip input that would use a template defined for the input and add a template to render "chips". (See an example [here](https://awc.dev/chip-input)).
 
-Please focus on explaining the motivation so that if this RFC is not accepted,
-the motivation could be used to develop alternative solutions. In other words,
-enumerate the constraints you are trying to solve without coupling them too
-closely to the solution you have in mind.
+In other cases, an author may want to change a template of the superclass to modify an element to fit a new use case. In such a situation they only override a template function responsible for producing a template for a specific part of the UI of the component.
+
+Another use case is when building a UI for several components that have similar functionality. A real-life example for the domain modelling project is an excellent illustration of this use case. This project has several similar forms. Each form has common items like name and description. Instead of copying the same template into each form, instead, the preferred way is to use a function that the author calls to return the form element (including parametrization like a label or a hint text via arguments).
 
 ## Detailed design
 
